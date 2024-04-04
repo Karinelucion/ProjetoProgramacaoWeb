@@ -1,3 +1,3 @@
 # ProjetoProgramacaoWeb
 
-Colega: Matheus Martarello Gutstein
+Dupla: Karine Lucion e Matheus Martarello Gutstein
