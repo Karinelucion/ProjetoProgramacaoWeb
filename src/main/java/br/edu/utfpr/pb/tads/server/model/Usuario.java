@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.tads.server.model;
 
+import br.edu.utfpr.pb.tads.server.annotation.NomeUsuarioUnico;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,7 +27,8 @@ public class Usuario implements UserDetails {
 
     @NotNull(message = "O nome do usuário não deve ser nulo.")
     @Size(min = 4, max = 255)
-    private String nomeUsuario;
+    @NomeUsuarioUnico
+    private String username;
 
     @NotNull
     @Size(min = 4, max = 255)
@@ -50,7 +52,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.getNomeUsuario();
+        return this.getUsername();
     }
 
     @Override
