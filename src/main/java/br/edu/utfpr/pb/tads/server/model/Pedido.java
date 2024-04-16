@@ -18,15 +18,15 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pedidoid;
+    private Long id;
 
     @NotNull(message = "A data e hora do pedido não devem ser nulas.")
+    @Column(nullable = false)
     private LocalDateTime dataHora;
 
     @NotNull(message = "O usuário do pedido não deve ser nulo")
     @ManyToOne
-    @JoinColumn(name = "usuarioid")
+    @Column(nullable = false)
+    @JoinColumn(name = "usuarioid", referencedColumnName = "id")
     private Usuario usuario;
-
-
 }

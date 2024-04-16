@@ -1,4 +1,4 @@
-package br.edu.utfpr.pb.tads.server.WebConfig;
+package br.edu.utfpr.pb.tads.server.config;
 
 
 import org.modelmapper.ModelMapper;
