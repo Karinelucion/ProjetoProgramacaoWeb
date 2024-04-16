@@ -1,7 +1,7 @@
 package br.edu.utfpr.pb.tads.server.security;
 
 import br.edu.utfpr.pb.tads.server.model.Usuario;
-import br.edu.utfpr.pb.tads.server.service.AutenticacaoService;
+import br.edu.utfpr.pb.tads.server.service.impl.AutenticacaoServiceImpl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import jakarta.servlet.FilterChain;
@@ -17,10 +17,10 @@ import java.io.IOException;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private final AutenticacaoService autenticacaoService;
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, AutenticacaoService autenticacaoService) {
+    private final AutenticacaoServiceImpl autenticacaoServiceImpl;
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, AutenticacaoServiceImpl autenticacaoServiceImpl) {
         super(authenticationManager);
-        this.autenticacaoService = autenticacaoService;
+        this.autenticacaoServiceImpl = autenticacaoServiceImpl;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 .getSubject();
 
         if (username != null){
-            Usuario usuario = (Usuario) autenticacaoService.loadUserByUsername(username);
+            Usuario usuario = (Usuario) autenticacaoServiceImpl.loadUserByUsername(username);
 
-            return new UsernamePasswordAuthenticationToken(usuario.getUsername(), null, usuario.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(usuario.getNomeUsuario(), null, usuario.getAuthorities());
         }
 
         return null;

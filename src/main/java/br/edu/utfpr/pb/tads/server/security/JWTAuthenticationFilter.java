@@ -1,7 +1,7 @@
 package br.edu.utfpr.pb.tads.server.security;
 
 import br.edu.utfpr.pb.tads.server.model.Usuario;
-import br.edu.utfpr.pb.tads.server.service.AutenticacaoService;
+import br.edu.utfpr.pb.tads.server.service.impl.AutenticacaoServiceImpl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,11 +21,11 @@ import java.util.Date;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-    private final AutenticacaoService autenticacaoService;
+    private final AutenticacaoServiceImpl autenticacaoServiceImpl;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, AutenticacaoService autenticacaoService) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, AutenticacaoServiceImpl autenticacaoServiceImpl) {
         this.authenticationManager = authenticationManager;
-        this.autenticacaoService = autenticacaoService;
+        this.autenticacaoServiceImpl = autenticacaoServiceImpl;
     }
 
     @Override
@@ -36,12 +36,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             Usuario credenciais = new ObjectMapper()
                     .readValue(request.getInputStream(), Usuario.class);
 
-            Usuario usuario = (Usuario) autenticacaoService.loadUserByUsername(
-                    credenciais.getUsername());
+            Usuario usuario = (Usuario) autenticacaoServiceImpl.loadUserByUsername(
+                    credenciais.getNomeUsuario());
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            credenciais.getUsername(),
+                            credenciais.getNomeUsuario(),
                             credenciais.getSenha(),
                             usuario.getAuthorities()
                     )

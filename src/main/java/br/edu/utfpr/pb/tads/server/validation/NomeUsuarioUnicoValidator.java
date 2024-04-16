@@ -13,7 +13,7 @@ public class NomeUsuarioUnicoValidator implements ConstraintValidator<NomeUsuari
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (usuarioRepository.findByUsername(s) == null) {
+        if (usuarioRepository.findByNomeUsuario(s) == null) {
             return true;
         }
         return false;
