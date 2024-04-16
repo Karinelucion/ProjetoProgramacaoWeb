@@ -1,7 +1,7 @@
 package br.edu.utfpr.pb.tads.server.controller;
 
 import br.edu.utfpr.pb.tads.server.model.Usuario;
-import br.edu.utfpr.pb.tads.server.service.UsuarioService;
+import br.edu.utfpr.pb.tads.server.service.impl.UsuarioServiceImpl;
 import br.edu.utfpr.pb.tads.server.shared.GenericResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("usuario")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioServiceImpl usuarioServiceImpl;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public UsuarioController(UsuarioServiceImpl usuarioServiceImpl) {
+        this.usuarioServiceImpl = usuarioServiceImpl;
     }
 
     @PostMapping
     public GenericResponse createUser(@Valid @RequestBody Usuario usuario) {
-        usuarioService.salvar(usuario);
+        usuarioServiceImpl.salvar(usuario);
         return GenericResponse.builder().message("Usuário salvo com sucesso").build();
     }
 }

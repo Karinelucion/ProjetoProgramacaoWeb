@@ -15,9 +15,9 @@ public class CategoriaController extends CrudController<Categoria, CategoriaDTO,
     private static ICategoriaService categoriaService;
     private static ModelMapper modelMapper;
 
-    public CategoriaController(ICategoriaService categoriaService,
-                              ModelMapper modelMapper) {
+    public CategoriaController(ICategoriaService categoriaService, ModelMapper modelMapper) {
         super(Categoria.class, CategoriaDTO.class);
+
         CategoriaController.categoriaService = categoriaService;
         CategoriaController.modelMapper = modelMapper;
     }

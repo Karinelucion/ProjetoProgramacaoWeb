@@ -28,7 +28,7 @@ public class Usuario implements UserDetails {
     @NotNull(message = "O nome do usuário não deve ser nulo.")
     @Size(min = 4, max = 255)
     @NomeUsuarioUnico
-    private String username;
+    private String nomeUsuario;
 
     @NotNull
     @Size(min = 4, max = 255)
@@ -50,9 +50,8 @@ public class Usuario implements UserDetails {
         return this.getSenha();
     }
 
-    @Override
     public String getUsername() {
-        return this.username;
+        return this.nomeUsuario;
     }
 
     @Override

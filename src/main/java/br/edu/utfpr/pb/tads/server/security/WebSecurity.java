@@ -1,6 +1,6 @@
 package br.edu.utfpr.pb.tads.server.security;
 
-import br.edu.utfpr.pb.tads.server.service.AutenticacaoService;
+import br.edu.utfpr.pb.tads.server.service.impl.AutenticacaoServiceImpl;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -21,12 +21,12 @@ import org.springframework.stereotype.Component;
 @EnableWebSecurity
 public class WebSecurity {
 
-    private final AutenticacaoService autenticacaoService;
+    private final AutenticacaoServiceImpl autenticacaoServiceImpl;
 
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
-    public WebSecurity(AutenticacaoService autenticacaoService, AuthenticationEntryPoint authenticationEntryPoint) {
-        this.autenticacaoService = autenticacaoService;
+    public WebSecurity(AutenticacaoServiceImpl autenticacaoServiceImpl, AuthenticationEntryPoint authenticationEntryPoint) {
+        this.autenticacaoServiceImpl = autenticacaoServiceImpl;
         this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
@@ -36,7 +36,7 @@ public class WebSecurity {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 
         authenticationManagerBuilder
-                .userDetailsService(autenticacaoService)
+                .userDetailsService(autenticacaoServiceImpl)
                 .passwordEncoder(passwordEncoder());
 
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
@@ -53,18 +53,15 @@ public class WebSecurity {
         http.authorizeHttpRequests((authorize) ->
                 authorize.requestMatchers(HttpMethod.POST, "/usuario/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/categorias/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produtos/**").permitAll()
                         .anyRequest().authenticated()
         );
 
         http.authenticationManager(authenticationManager)
-                .addFilter(new JWTAuthenticationFilter(authenticationManager, autenticacaoService)
-                )
-                .sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS)
-                );
+                .addFilter(new JWTAuthenticationFilter(authenticationManager, autenticacaoServiceImpl))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager, autenticacaoServiceImpl))
+                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }

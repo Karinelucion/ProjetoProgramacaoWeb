@@ -19,6 +19,7 @@ public class ProdutoController extends CrudController<Produto, ProdutoDTO, Long>
 
     public ProdutoController(IProdutoService produtoService, ModelMapper modelMapper) {
         super(Produto.class, ProdutoDTO.class);
+
         ProdutoController.produtoService = produtoService;
         ProdutoController.modelMapper = modelMapper;
     }

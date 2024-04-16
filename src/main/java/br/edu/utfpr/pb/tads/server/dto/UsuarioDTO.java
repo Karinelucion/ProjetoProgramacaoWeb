@@ -33,6 +33,6 @@ public class UsuarioDTO {
     public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nomeExibicao = usuario.getNomeExibicao();
-        this.username = usuario.getUsername();
+        this.username = usuario.getNomeUsuario();
     }
 }
