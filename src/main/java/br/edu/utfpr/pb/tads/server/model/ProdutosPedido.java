@@ -11,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ItensPedido {
+public class ProdutosPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +26,8 @@ public class ItensPedido {
     @ManyToOne
     @JoinColumn(name = "produtoid", referencedColumnName = "id")
     private Produto produto;
+
+    @NotNull(message = "A quantidade do produto não pode ser nula.")
+    private Integer quantidade;
+
 }
