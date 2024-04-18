@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -28,4 +29,7 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "usuarioid", referencedColumnName = "id")
     private Usuario usuario;
+
+    @NotNull(message = "O valor total do pedido não deve ser nulo.")
+    private BigDecimal valorTotal;
 }

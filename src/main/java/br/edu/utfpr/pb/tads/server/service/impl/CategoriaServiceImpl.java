@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 public class CategoriaServiceImpl extends CrudServiceImpl<Categoria, Long>
         implements ICategoriaService{
 
-    private final ICategoriaRepository ICategoriaRepository;
+    private final ICategoriaRepository categoriaRepository;
 
     public CategoriaServiceImpl(ICategoriaRepository categoryRepository) {
-        this.ICategoriaRepository = categoryRepository;
+        this.categoriaRepository = categoryRepository;
     }
 
     @Override
     protected JpaRepository<Categoria, Long> getRepository() {
-        return ICategoriaRepository;
+        return categoriaRepository;
     }
 }
