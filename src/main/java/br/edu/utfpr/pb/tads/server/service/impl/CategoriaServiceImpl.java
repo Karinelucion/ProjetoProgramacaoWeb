@@ -2,7 +2,7 @@ package br.edu.utfpr.pb.tads.server.service.impl;
 
 
 import br.edu.utfpr.pb.tads.server.model.Categoria;
-import br.edu.utfpr.pb.tads.server.repository.CategoriaRepository;
+import br.edu.utfpr.pb.tads.server.repository.ICategoriaRepository;
 import br.edu.utfpr.pb.tads.server.service.ICategoriaService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class CategoriaServiceImpl extends CrudServiceImpl<Categoria, Long>
         implements ICategoriaService{
 
-    private final CategoriaRepository categoriaRepository;
+    private final ICategoriaRepository categoriaRepository;
 
-    public CategoriaServiceImpl(CategoriaRepository categoryRepository) {
+    public CategoriaServiceImpl(ICategoriaRepository categoryRepository) {
         this.categoriaRepository = categoryRepository;
     }
 

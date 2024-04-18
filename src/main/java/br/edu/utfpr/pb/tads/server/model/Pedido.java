@@ -26,7 +26,6 @@ public class Pedido {
 
     @NotNull(message = "O usuário do pedido não deve ser nulo")
     @ManyToOne
-    @Column(nullable = false)
     @JoinColumn(name = "usuarioid", referencedColumnName = "id")
     private Usuario usuario;
 }
