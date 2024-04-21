@@ -23,7 +23,7 @@ public class Produto {
     private String nome;
 
     @NotNull
-    @Column(length = 1024)
+    @Column(columnDefinition = "TEXT")
     @Getter @Setter
     private String descricao;
 
@@ -33,6 +33,7 @@ public class Produto {
 
     @NotNull
     @Getter @Setter
+    @Column(columnDefinition = "TEXT")
     private String urlImagem;
 
     @ManyToOne
