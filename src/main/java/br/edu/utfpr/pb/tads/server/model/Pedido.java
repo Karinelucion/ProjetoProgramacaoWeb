@@ -6,7 +6,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -31,4 +33,8 @@ public class Pedido {
 
     @NotNull(message = "O valor total do pedido não deve ser nulo.")
     private BigDecimal valorTotal;
+
+    @NotNull(message = "Um pedido precisa ter ao menos um produto.")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutosPedido> produtosPedido = new ArrayList<>();
 }
