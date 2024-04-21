@@ -13,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestExecutionListeners;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -36,11 +37,20 @@ public class UsuarioControllerTest {
 
     @Test
     public void cadastraUsuario_quandoUsuarioEhValido_retornaOK(){
-        Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("123456789").build();
+        Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("Karine@1234567").build();
 
         ResponseEntity<Object> response = this.testRestTemplate.postForEntity("/usuario", usuario, Object.class, new Object[0]);
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void cadastraUsuario_quandoSenhaehInvalida_retornaBadRequest(){
+        Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("123456789").build();
+
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity("/usuario", usuario, Object.class, new Object[0]);
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 
     }
+
 
 }
