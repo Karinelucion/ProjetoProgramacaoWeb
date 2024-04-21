@@ -5,6 +5,8 @@ import br.edu.utfpr.pb.tads.server.repository.IUsuarioRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 public class NomeUsuarioUnicoValidator implements ConstraintValidator<NomeUsuarioUnico, String> {
 
