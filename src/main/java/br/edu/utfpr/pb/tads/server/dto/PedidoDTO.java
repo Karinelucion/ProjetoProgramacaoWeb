@@ -1,21 +1,15 @@
-package br.edu.utfpr.pb.tads.server.model;
+package br.edu.utfpr.pb.tads.server.dto;
 
+import br.edu.utfpr.pb.tads.server.model.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Entity
-@Table(name = "tb_pedido")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-public class Pedido {
+@Data
+public class PedidoDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +18,6 @@ public class Pedido {
     @NotNull(message = "A data e hora do pedido não devem ser nulas.")
     @Column(nullable = false)
     private LocalDateTime dataHora;
-
-    @ManyToOne
-    @JoinColumn(name = "usuarioid", referencedColumnName = "id")
-    private Usuario usuario;
 
     @NotNull(message = "O valor total do pedido não deve ser nulo.")
     private BigDecimal valorTotal;
