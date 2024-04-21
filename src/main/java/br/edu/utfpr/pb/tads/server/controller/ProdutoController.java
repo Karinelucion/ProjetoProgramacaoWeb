@@ -6,8 +6,13 @@ import br.edu.utfpr.pb.tads.server.service.IProdutoService;
 import br.edu.utfpr.pb.tads.server.service.ICrudService;
 import br.edu.utfpr.pb.tads.server.dto.ProdutoDTO;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("produtos")
@@ -32,5 +37,16 @@ public class ProdutoController extends CrudController<Produto, ProdutoDTO, Long>
     @Override
     protected ModelMapper getModelMapper() {
         return modelMapper;
+    }
+
+    @GetMapping("/categoria/{categoriaId}")
+    public ResponseEntity<List<Produto>> getProdutosPorCategoria(@PathVariable Long categoriaId) {
+        List<Produto> produtos = produtoService.buscarPorCategoria(categoriaId);
+
+        if (!produtos.isEmpty()) {
+            return ResponseEntity.ok(produtos);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
