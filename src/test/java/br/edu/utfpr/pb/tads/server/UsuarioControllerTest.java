@@ -39,18 +39,44 @@ public class UsuarioControllerTest {
     public void cadastraUsuario_quandoUsuarioEhValido_retornaOK(){
         Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("Karine@1234567").build();
 
-        ResponseEntity<Object> response = this.testRestTemplate.postForEntity("/usuario", usuario, Object.class, new Object[0]);
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity(API_USUARIO, usuario, Object.class, new Object[0]);
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
-    public void cadastraUsuario_quandoSenhaehInvalida_retornaBadRequest(){
+    public void cadastraUsuario_quandoSenhaEhInvalida_retornaBadRequest(){
         Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("123456789").build();
 
-        ResponseEntity<Object> response = this.testRestTemplate.postForEntity("/usuario", usuario, Object.class, new Object[0]);
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity(API_USUARIO, usuario, Object.class, new Object[0]);
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 
     }
 
+    @Test
+    public void cadastraUsuario_quandoNomeEhNulo_retornaBadRequest(){
+        Usuario usuario = Usuario.builder().nomeUsuario(null).nomeExibicao("Karine").senha("Karine@12345670+6").build();
 
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity(API_USUARIO, usuario, Object.class, new Object[0]);
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    public void cadastraUsuario_quandoNomeUsuarioJaexiste_retonaBadRequest(){
+        Usuario usuario = criaUsuarioValido();
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity(API_USUARIO, usuario, Object.class, new Object[0]);
+        usuario = Usuario.builder()
+                .nomeUsuario("teste-user")
+                .nomeExibicao("teste-Display2")
+                .senha("P4assword2").build();
+
+        response = this.testRestTemplate.postForEntity(API_USUARIO, usuario, Object.class, new Object[0]);
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    private Usuario criaUsuarioValido() {
+        return Usuario.builder()
+                .nomeUsuario("teste-user")
+                .nomeExibicao("teste-Display")
+                .senha("P4assword").build();
+    }
 }
