@@ -35,6 +35,7 @@ public class UsuarioControllerTest {
         this.testRestTemplate.getRestTemplate().getInterceptors().clear();
     }
 
+    //Teste 2
     @Test
     public void cadastraUsuario_quandoUsuarioEhValido_retornaOK(){
         Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("Karine@1234567").build();
@@ -43,6 +44,7 @@ public class UsuarioControllerTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    //Teste 3
     @Test
     public void cadastraUsuario_quandoSenhaEhInvalida_retornaBadRequest(){
         Usuario usuario = Usuario.builder().nomeUsuario("karine").nomeExibicao("Karine").senha("123456789").build();
@@ -52,6 +54,7 @@ public class UsuarioControllerTest {
 
     }
 
+    //Teste 4
     @Test
     public void cadastraUsuario_quandoNomeEhNulo_retornaBadRequest(){
         Usuario usuario = Usuario.builder().nomeUsuario(null).nomeExibicao("Karine").senha("Karine@12345670+6").build();
@@ -60,6 +63,7 @@ public class UsuarioControllerTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
+    //Teste 5
     @Test
     public void cadastraUsuario_quandoNomeUsuarioJaexiste_retonaBadRequest(){
         Usuario usuario = criaUsuarioValido();
