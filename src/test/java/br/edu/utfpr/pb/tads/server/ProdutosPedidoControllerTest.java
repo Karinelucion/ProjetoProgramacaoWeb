@@ -19,19 +19,20 @@ import java.time.LocalDateTime;
 )
 @ActiveProfiles({"test"})
 public class ProdutosPedidoControllerTest {
-    private final String API_PRODUTOSPEDIDO = "/pedidos";
+    private final String API_PRODUTOSPEDIDO = "/pedidos/salvar";
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     public ProdutosPedidoControllerTest() {
     }
 
+    //Teste 1
     @Test
     public void cadastraProdutosPedido_quandoQuantidadeEhNull_retornaBadRequest()
     {
         ProdutosPedido produtosPedido = ProdutosPedido.builder().produto(criaProdutoValido()).pedido(criaPedidoValido()).quantidade(null).build();
 
-        ResponseEntity<Object> response = this.testRestTemplate.postForEntity("/pedidos", produtosPedido, Object.class, new Object[0]);
+        ResponseEntity<Object> response = this.testRestTemplate.postForEntity(API_PRODUTOSPEDIDO, produtosPedido, Object.class, new Object[0]);
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
