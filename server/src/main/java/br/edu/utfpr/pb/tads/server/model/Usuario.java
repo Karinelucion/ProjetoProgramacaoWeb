@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.tads.server.model;
 
 import br.edu.utfpr.pb.tads.server.annotation.NomeUsuarioUnico;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -41,6 +42,8 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @Override
+    @Transient
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList("ROLE_USER");
     }
@@ -55,21 +58,29 @@ public class Usuario implements UserDetails {
     }
 
     @Override
+    @Transient
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @Transient
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @Transient
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @Transient
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
