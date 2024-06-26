@@ -10,3 +10,16 @@ export interface IProduto {
     preco: number;
     categoria: ICategoria;
   }
+
+export interface ICadastroUsuario{
+    id?: number;
+    nomeUsuario: string;
+    nomeExibicao: string;
+    senha: string;
+    senhaRepeat: string;
+}
+
+export interface ILoginUsuario{
+    nomeUsuario: string;
+    senha: string;
+}

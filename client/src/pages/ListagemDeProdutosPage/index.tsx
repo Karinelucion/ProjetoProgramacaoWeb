@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ProductService from "@/service/ProductService";
+import ProductService from "@/service/ProdutoService";
 import {
   Table,
   Thead,
@@ -23,9 +23,9 @@ import {
   BsTrash,
   BsPlusCircle,
 } from "react-icons/bs";
-import { IProduto } from "@commons/interfaces";
+import { IProduto } from "@/commons/interfaces";
 
-export function ProductListPageV2() {
+export function ListagemDeProdutos() {
   const [data, setData] = useState<IProduto[]>([]);
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
@@ -67,16 +67,6 @@ export function ProductListPageV2() {
   return (
     <div className="container">
       <h1 className="fs-2 mb-4 text-center">Lista de Produtos</h1>
-      <div className="text-center">
-        <Link
-          className="btn btn-success btn-icon mb-3"
-          to="/produtos/new"
-          title="Novo Produto"
-          style={{ display: "inline-block" }}
-        >
-          <BsPlusCircle style={{ display: "inline-block" }} /> Novo Produto
-        </Link>
-      </div>
       <TableContainer>
         <Table>
           <TableCaption>Lista de Produtos</TableCaption>
