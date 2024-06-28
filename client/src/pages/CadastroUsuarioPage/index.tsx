@@ -107,7 +107,7 @@ export function CadastroUsuario() {
             name="senha"
             label="Informe a senha"
             className="form-control"
-            type="text"
+            type="password"
             placeholder="Informe a senha"
             onChange={onChange}
             value={form.senha}
@@ -142,9 +142,7 @@ export function CadastroUsuario() {
 
         <div className="text-center">
           Já possui cadastro? <br />
-          <Link className="link-primary" to="/">
-            Login
-          </Link>
+          <Link to="/login" className="link-primary">Ir para tela de login</Link>
         </div>
       </form>
     </main>

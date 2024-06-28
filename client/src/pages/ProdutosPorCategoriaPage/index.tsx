@@ -4,7 +4,7 @@ import ProdutoService from "@/service/ProdutoService";
 import { IProduto } from "@/commons/interfaces";
 import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack } from "@chakra-ui/react";
 
-export function ListagemDeProdutos() {
+export function ProdutosPorCategoria() {
     const [data, setData] = useState<IProduto[]>([]);
     const [apiError, setApiError] = useState("");
     const navigate = useNavigate();
@@ -67,9 +67,14 @@ export function ListagemDeProdutos() {
                     </CardBody>
                     <Divider />
                     <CardFooter>
-                          <Button variant='ghost' colorScheme='blue'>
-                              Adicionar ao carrinho
-                          </Button>
+                        <ButtonGroup spacing='2'>
+                            <Button variant='solid' colorScheme='blue'>
+                                Buy now
+                            </Button>
+                            <Button variant='ghost' colorScheme='blue'>
+                                Adicionar ao carrinho
+                            </Button>
+                        </ButtonGroup>
                     </CardFooter>
                 </Card>
             ))}

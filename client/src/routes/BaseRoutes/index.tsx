@@ -11,7 +11,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import { HomePage } from "@/pages/HomePage";
 // import { AuthenticatedRoutes } from "../AuthenticatedRoutes";
 // import { HomePage } from "@/pages/HomePage";
-// import { CategoryListPage } from "@/pages/CategoryListPage";
+import { ProdutosPorCategoria } from "@/pages/ProdutosPorCategoriaPage";
 
 export function BaseRoutes() {
   return (
@@ -21,16 +21,13 @@ export function BaseRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/usuario" element={<CadastroUsuario/>} />
         <Route path="/inicio" element={<HomePage />} />
-            <Route path="/" element={<HomePage />} /> 
+        <Route path="/" element={<HomePage />} /> 
+        <Route path="/produtos" element={<ListagemDeProdutos />} />
+        <Route path="/categorias/:id" element={<ProdutosPorCategoria />} />
 
         {/* Protected Routes */}
         <Route element={<AuthenticatedRoutes />}>
-            
-            {/* <Route path="/categorias" element={<CategoryListPage />} /> */}
-            {/* <Route path="/categorias/:id" element={<CategoryFormPage />} /> */}
 
-            <Route path="/produtos" element={<ListagemDeProdutos />} />
-            {/* <Route path="/produtos/:id" element={<ProductFormPage />} /> */}
         </Route>
 
       </Routes>

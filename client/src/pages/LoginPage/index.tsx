@@ -1,78 +1,98 @@
-import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import "./style.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { ILoginUsuario } from "@/commons/interfaces";
+import AuthService from "@/service/AuthService";
+import { ButtonWithProgress } from "@/components/ButtonWithProgress";
 
 export function LoginPage() {
   const [form, setForm] = useState({
     nomeUsuario: "",
     senha: "",
   });
+  const navigate = useNavigate();
+  const [pendingApiCall, setPendingApiCall] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [apiSuccess, setApiSuccess] = useState("");
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
-    setForm((previousForm) => {
-      return {
-        ...previousForm,
-        [name]: value,
-      };
-    });
+    const { name, value } = event.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setApiError("");
   };
 
-  const onClickLogin = () => {
-    const login = {
-      username: form.nomeUsuario,
-      password: form.senha,
+  const onClickLogin = async () => {
+    setPendingApiCall(true);
+    event?.preventDefault();
+    const usuario: ILoginUsuario = {
+      nomeUsuario: form.nomeUsuario,
+      senha: form.senha,
     };
 
-    axios
-      .post("/login", login)
-      .then((response) => {
-        console.log(response.data.message);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const response = await AuthService.login(usuario);
+    if (response.status === 200) {
+      setApiSuccess("Autenticado com sucesso!");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } else {
+      setPendingApiCall(false);
+      setApiError("Falha ao autenticar o usuário!");
+    }
   };
 
   return (
     <>
-      <div className="container">
-        <h1 className="text-center">
-          Login
-        </h1>
-        <div className="col-12 mb-3">
-          <label htmlFor="nomeUsuario">Informe seu usuário:</label>
-          <input
-            type="text"
-            id="nomeUsuario"
-            name="nomeUsuario"
-            value={form.nomeUsuario}
-            placeholder="Informe seu usuário"
-            className="form-control"
-            onChange={onChange}
-          />
-        </div>
-        <div className="col-12 mb-3">
-          <label htmlFor="senha">Informe sua senha:</label>
-          <input
-            type="senha"
-            id="senha"
-            name="senha"
-            value={form.senha}
-            placeholder="******"
-            className="form-control"
-            onChange={onChange}
-          />
-        </div>
+      <main className="form-signup w-100 m-auto">
+        <form>
+          <div className="text-center">
+            <h1 className="h3 mb-3 fw-normal">Login</h1>
+          </div>
+          <div className="form-floating">
+            <input
+              id="nomeUsuario"
+              name="nomeUsuario"
+              className="form-control"
+              type="text"
+              placeholder="Informe o usuário"
+              onChange={onChange}
+            />
+            <label htmlFor="nomeUsuario">Informe o usuário</label>
+          </div>
+          <div className="form-floating">
+            <input
+              id="senha"
+              name="senha"
+              className="form-control"
+              type="password"
+              placeholder="Informe a senha"
+              onChange={onChange}
+            />
+            <label htmlFor="senha">Informe a senha</label>
+          </div>
+
+          {apiError && (
+            <div className="col-12 mb-3">
+              <div className="alert alert-danger">{apiError}</div>
+            </div>
+          )}
+          {apiSuccess && (
+            <div className="col-12 mb-3">
+              <div className="alert alert-success">{apiSuccess}</div>
+            </div>
+          )}
+          
+          <ButtonWithProgress 
+            onClick={onClickLogin}
+            disabled={pendingApiCall}
+            pendingApiCall={pendingApiCall}
+            text="Login"
+          />         
+        </form>
         <div className="text-center">
-          <button className="btn btn-primary" onClick={onClickLogin}>
-            Login
-          </button>
+          <Link to="/usuario">Deseja cadastrar-se</Link>
         </div>
-        <div className="text-center">
-            <Link to="/usuario">Cadastre-se</Link>
-        </div>
-      </div>
+      </main>
     </>
   );
 }
