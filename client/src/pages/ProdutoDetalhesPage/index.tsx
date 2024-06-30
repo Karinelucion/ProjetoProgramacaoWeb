@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ProdutoService from "@/service/ProdutoService";
 import { IProduto } from "@/commons/interfaces";
 import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack } from "@chakra-ui/react";
+import CarrinhoService from "@/service/CarrinhoService";
 
 export function ProdutosDetalhes() {
     const [data, setData] = useState<IProduto[]>([]);
@@ -41,6 +42,10 @@ export function ProdutosDetalhes() {
         } else {
             setApiError("Falha ao remover o produto.");
         }
+    };
+
+    const onClickAdicionarAoCarrinho = (produto: IProduto) => {
+        CarrinhoService.adicionarAoCarrinho(produto);
     };
 
     return (
@@ -123,7 +128,10 @@ export function ProdutosDetalhes() {
                         </div>
 
                         <div className="d-flex mt-5 align-items-end justify-content-center">
-                            <button type="button" className="btn btn-outline-primary btn-cadastrar btn-adicionar w-50" data-mdb-ripple-color="dark"><i className="fas fa-plus-circle me-2"></i>Comprar</button>
+                            <button onClick={() => onClickAdicionarAoCarrinho(produto)} type="button" className="btn btn-outline-primary btn-cadastrar btn-adicionar w-50" data-mdb-ripple-color="dark">
+                                <i className="fas fa-plus-circle me-2"></i>
+                                Comprar
+                            </button>
                         </div>
                         <div className="w-100 row align-items-end justify-content-between">
                         </div>

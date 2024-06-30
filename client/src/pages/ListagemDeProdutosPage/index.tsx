@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ProdutoService from "@/service/ProdutoService";
 import { IProduto } from "@/commons/interfaces";
 import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack } from "@chakra-ui/react";
+import CarrinhoService from "@/service/CarrinhoService";
 
 export function ListagemDeProdutos() {
     const [data, setData] = useState<IProduto[]>([]);
@@ -43,6 +44,10 @@ export function ListagemDeProdutos() {
         }
     };
 
+    const onClickAdicionarAoCarrinho = (produto: IProduto) => {
+        CarrinhoService.adicionarAoCarrinho(produto);
+    };
+
     return (
         <div className="container">
             <h1 className="fs-2 mb-4 text-center">Lista de Produtos</h1>
@@ -67,7 +72,7 @@ export function ListagemDeProdutos() {
                     </CardBody>
                     <Divider />
                     <CardFooter>
-                          <Button variant='ghost' colorScheme='blue'>
+                          <Button onClick={() => onClickAdicionarAoCarrinho(produto)} variant='ghost' colorScheme='blue'>
                               Adicionar ao carrinho
                           </Button>
                     </CardFooter>

@@ -8,6 +8,7 @@ import blackfriday from "@/assets/blackfriday.png";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import ProdutoService from "@/service/ProdutoService";
+import CarrinhoService from "@/service/CarrinhoService";
 
 import "./style.scss";
 
@@ -58,6 +59,10 @@ export function HomePage() {
             chunkedArray.push(arr.slice(i, i + chunkSize));
         }
         return chunkedArray;
+    };
+
+    const onClickAdicionarAoCarrinho = (produto: IProduto) => {
+        CarrinhoService.adicionarAoCarrinho(produto);
     };
 
     return (
@@ -150,7 +155,7 @@ export function HomePage() {
                                                 <Divider />
                                                 <CardFooter>
                                                     <Link to={`/produto/${produto.id}`} type="button" className='btn btn-primary'>Ver produto</Link>
-                                                    <Button colorScheme='blue'>
+                                                    <Button onClick={() => onClickAdicionarAoCarrinho(produto)} colorScheme='blue'>
                                                         Adicionar ao carrinho
                                                     </Button>
                                                 </CardFooter>

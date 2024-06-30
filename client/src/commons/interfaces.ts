@@ -24,3 +24,18 @@ export interface ILoginUsuario{
     nomeUsuario: string;
     senha: string;
 }
+
+export interface IProdutosPedido{
+    id?: number;
+    pedido?: number;
+    produto: IProduto;
+    quantidade: number;
+}
+
+export interface IPedido{
+    id?: number;
+    usuario?: ICadastroUsuario;
+    valorToral: number;
+    produtosPedido: IProdutosPedido[];
+
+}
