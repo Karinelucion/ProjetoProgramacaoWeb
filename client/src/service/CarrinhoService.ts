@@ -39,9 +39,56 @@ export const adicionarAoCarrinho = (produto: IProduto) => {
     return produtosPedido;
   };
 
+  export const atualizarCarrinho = (novosProdutosPedido: IProdutosPedido[]) => {
+    localStorage.setItem("produtosPedido", JSON.stringify(novosProdutosPedido));
+  }
+
+  const aumentarQuantidade = (produto: IProduto) => {
+    const produtosPedido = consultarCarrinho();
+  
+    const novosProdutosPedido = produtosPedido.map((p) => {
+      if (p.produto.id === produto.id) {
+        return { ...p, quantidade: p.quantidade + 1 };
+      }
+      return p;
+    });
+  
+    atualizarCarrinho(novosProdutosPedido);
+
+    return novosProdutosPedido;
+  };
+
+  const diminuirQuantidade = (produto: IProduto) => {
+    const produtosPedido = consultarCarrinho();
+  
+    const novosProdutosPedido = produtosPedido.map((p) => {
+      if (p.produto.id === produto.id) {
+        return { ...p, quantidade: p.quantidade - 1 };
+      }
+      return p;
+    }).filter((p) => p.quantidade > 0);
+  
+    atualizarCarrinho(novosProdutosPedido);
+
+    return novosProdutosPedido;
+  };
+
+  const removerProduto = (produto: IProduto) => {
+    const produtosPedido = consultarCarrinho(); 
+
+    const novosProdutosPedido = produtosPedido.filter((p) => p.produto.id !== produto.id);
+
+    atualizarCarrinho(novosProdutosPedido);
+
+    return novosProdutosPedido;
+  };
+
   const CarrinhoService = {
     adicionarAoCarrinho,
     consultarCarrinho,
+    aumentarQuantidade,
+    diminuirQuantidade,
+    removerProduto,
   };
   
   export default CarrinhoService;
