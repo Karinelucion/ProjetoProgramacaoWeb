@@ -1,0 +1,41 @@
+.background {
+    background: linear-gradient(136deg, #170c74, #40705c, #320e63)  0% 0% / 300% 300%;
+    background-size: 900%;
+
+    -webkit-animation: AnimationName 14s ease infinite;
+    -moz-animation: AnimationName 14s ease infinite;
+    -o-animation: AnimationName 14s ease infinite;
+    animation: AnimationName 14s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+
+.produtos{
+    background: rgba(107, 107, 107, 0.37);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13.3px);
+    -webkit-backdrop-filter: blur(13.3px);
+    border: 1px solid rgba(107, 107, 107, 0.79);
+    background-color: transparent !important;
+    border: none
+}

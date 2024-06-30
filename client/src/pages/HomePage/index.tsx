@@ -68,6 +68,7 @@ export function HomePage() {
     return (
         <>
             <Header />
+            <div style={{ height: '4rem' }} />
             <main className="container">
                 <div className="background">
                     <figure>
