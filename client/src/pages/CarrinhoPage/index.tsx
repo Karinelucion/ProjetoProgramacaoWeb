@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button,IconButton,  Flex, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, IconButton,  Flex, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react';
 import CarrinhoService from "@/service/CarrinhoService";
 import { IProdutosPedido, IProduto } from "@/commons/interfaces";
 import { DeleteIcon } from '@chakra-ui/icons';

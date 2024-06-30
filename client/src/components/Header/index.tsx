@@ -20,17 +20,17 @@ export function Header(){
                     </Link>
                 </div>
                 <ul className="navbar-nav flex-row">
-                    <div className="h-100 align-items-center my-auto mx-2">  
-                        <Link to="/login" type="button" className="btn btn-outline-primary" data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#loginModal">Entrar</Link>
+                    <div className="h-100 align-items-center my-auto mx-1">  
+                        <Link to="/login" type="button" className="btn btn-outline-success" data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#loginModal">Entrar</Link>
                     </div>
-                    <div className="h-100 align-items-center my-auto">
-                        <Link to="/usuario" type="button" className="btn btn-outline-primary" data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#cadastroModal">Cadastre-se já!</Link>
+                    <div className="h-100 align-items-center my-auto mx-1">
+                        <Link to="/usuario" type="button" className="btn btn-outline-success" data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#cadastroModal">Cadastre-se já!</Link>
                     </div>
-                    <li className="nav-item me-3 me-lg-1">
-                        <a className="nav-link text-center" href="pedido.html" id="carrinho">
-                            <span><FaShoppingCart /></span>
-                            <span className="badge rounded-pill badge-notification bg-danger" id="badgeCarrinho">0</span>
-                        </a>
+                    <li className="nav-item me-3 me-lg-1 ms-2 align-self-center ">
+                        <Link to="/carrinho" type='button' className='text-light position-relative'>
+                            <FaShoppingCart className='fs-4'/>
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-notification bg-success" id="badgeCarrinho">0</span>
+                        </Link>
                     </li>
                 </ul>
             </div>
