@@ -1,0 +1,358 @@
+body {
+    font-family: 'Jura', sans-serif;
+}
+
+.background {
+    background: linear-gradient(136deg, #170c74, #40705c, #320e63)  0% 0% / 300% 300%;
+    background-size: 900%;
+
+    -webkit-animation: AnimationName 14s ease infinite;
+    -moz-animation: AnimationName 14s ease infinite;
+    -o-animation: AnimationName 14s ease infinite;
+    animation: AnimationName 14s ease infinite;
+}
+
+.shop-name {
+    font-size: 1.3rem;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+
+h3 {
+    color: #7674F9;
+}
+
+.nav-settings{
+    background-color: #23232F;
+    height: 4rem;
+    -webkit-box-shadow: 0px 2px 22px 0px rgb(62, 49, 78);
+    -moz-box-shadow: 0px 2px 22px 0px rgba(62, 49, 78);
+    box-shadow: 0px 2px 22px 0px rgba(62, 49, 78);
+}
+
+.logo-settings {
+    margin-left: .5rem;
+}
+
+#input-busca{
+    background-color: #23232F;
+    width: 10.5rem;
+    max-width: 18.5rem;
+    border: 1px solid #7674F9;
+    border-radius: 8px 0px 0px 8px;
+    -moz-border-radius: 8px 0px 0px 8px;
+    -webkit-border-radius: 8px 0px 0px 8px;
+    transition: .3s;
+
+}
+
+.form-control{
+    color: #7674F9;
+    font-size: .7rem;
+}
+
+#input-busca:focus{
+    background-color: #23232F;
+    border-color: #abe6cd; 
+    color: #abe6cd;
+    transition: .3s;
+}
+
+#input-busca:focus::placeholder{
+    color: #abe6cd;
+    transition: .3s;
+}
+
+.input-group>.form-control{
+    height: 2rem;
+    transition: .3s;
+}
+
+.input-group>.form-control:focus {
+    border-color: #7674F9;
+    box-shadow: none;
+    color: #7674F9;
+    font-size: 1rem;
+    transition: .3s;
+}
+
+#buscar{
+    background-color: #23232F;
+    border-radius: 10%;
+    background-size: 100%;
+    height: 2.2rem;
+    width: 2.2rem;
+    max-width: 2.2rem;
+    border-radius: 0px 8px 8px 0px;
+    -moz-border-radius: 0px 8px 8px 0px;
+    -webkit-border-radius: 0px 8px 8px 0px;
+    border: 1px solid #7674F9;
+    transition: .3s;
+}
+
+#buscar:hover{
+    background-color: #abe6cd;
+    transition: .3s;
+}
+
+#buscar:hover #search{
+    transition: .3s;
+    color: #7674F9;
+}
+
+#buscar:hover + #input-busca {
+    border-color: #abe6cd;
+    color: #abe6cd;
+    transition: .3s;
+}
+
+#input-busca:focus + #buscar {
+    border-color: #abe6cd;
+    color: #abe6cd;
+    transition: .3s;
+}
+
+#input-busca:hover + #buscar {
+    border-color: #abe6cd;
+    color: #abe6cd;
+    transition: .3s;
+}
+
+#input-busca:hover{
+    border-color: #abe6cd;
+    color: #abe6cd;
+    transition: .3s;
+}
+
+#input-busca:hover::placeholder{
+    border-color: #abe6cd;
+    color: #abe6cd;
+    transition: .3s;
+}
+
+
+.width-280px{
+    width: 30.5rem;
+}
+
+#input-busca::placeholder{
+    color: #7674F9;
+    font-size: 1rem;
+}
+
+.icon-color {
+    color: #7674F9;
+}
+
+.height-100{
+    height: 100%;
+}
+
+.icon-settings{
+    font-size: 1.5rem;
+    transition: .3s;
+}
+
+.icon-settings:hover{
+    color: #abe6cd;
+    transition: .3s;
+}
+
+.badge-notification{
+    margin-left: 0;
+    margin-top: -.5rem;
+    font-size: .8rem;
+}
+
+.btn-entrar{
+    color: #7674F9;
+    border: none;
+    font-size: 1rem;
+    text-decoration: underline;
+    transition: .3s;
+}
+
+.btn-entrar:hover{
+    color: #abe6cd;
+    transition: .3s;
+    text-decoration: underline;
+    background: none;
+}
+
+.btn-cadastrar{
+    color: #7674F9;
+    border-color: #7674F9;
+    height: 2rem;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: .8rem;
+    transition: .3s;
+}
+
+.btn-cadastrar:hover{
+    color: #abe6cd;
+    border-color: #abe6cd;
+    transition: .3s;
+}
+
+.btn-cadastrar:focus{
+    color: #abe6cd;
+    border-color: #abe6cd;
+    transition: .3s;
+}
+
+.figura-promocao{
+    width: 100%;
+    height: 18rem;
+}
+
+.categorias{
+    color: #7674F9;
+    transition: .3s;
+    font-size: 1.7rem;
+}
+
+.categorias:hover{
+    color: #abe6cd;
+    text-decoration: underline;
+    transition: .3s;
+}
+
+.categorias-title{
+    color: #abe6cd;
+    transition: .3s;
+    font-size: 1.6rem;
+}
+
+.preco{
+    color: #abe6cd;
+}
+
+.card-hp-settings{
+    width: 30rem;
+    height: 17rem;
+}
+
+.card-hp-conteudo{
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(37.9px);
+    -webkit-backdrop-filter: blur(12.9px);
+    border: 1px solid #7977fd71;
+}
+
+.card-hp-detalhamento{
+    color: aliceblue;
+    font-size: 1rem;
+}
+
+.card-hp-img-teclado{
+    height: 11rem;
+    width: 19rem;
+}
+
+.card-hp-img-mouse{
+    height: 11rem;
+    width: 17rem;
+}
+
+.divisor-color{
+    color: #abe6cd;
+    width: 100rem;
+}
+
+.card-hp-img-headset{
+    height: 17rem;
+    width: 15rem;
+}
+
+.card-hp-img-mousepad{
+    height: 19rem;
+    width: 19rem;
+}
+
+.card{
+    overflow: hidden;
+}
+
+.hp-principal {
+    overflow: hidden;
+}
+
+.card-hp-produtos-settings {
+    width: 17rem;
+    max-width: 28rem;
+    height: 25rem;
+}
+
+.card-hp-produtos-conteudo {
+    background: rgba(50, 43, 43, 0.06);
+    border-radius: 6px;
+    backdrop-filter: blur(8.4px);
+    -webkit-backdrop-filter: blur(8.4px);
+    border: 1px solid rgba(50, 43, 43, 0.1);
+    -webkit-box-shadow: 0px 0px 13px -4px rgba(0,0,0,0.42);
+    -moz-box-shadow: 0px 0px 13px -4px rgba(0,0,0,0.42);
+    box-shadow: 0px 0px 13px -4px rgba(0,0,0,0.42);
+    border: none;
+}
+
+.produto-title{
+    color: aliceblue;
+    font-size: 1.4rem;
+}
+
+.produto-brand{
+    color: #7674F9;
+}
+
+.produto-price{
+    color: #abe6cd;
+    font-size: 1.4rem;
+}
+
+.btn-produto-card{
+    max-height: 3.5rem;
+    max-width: 18rem;
+}
+
+.pagination-settings{
+    color: #7674F9;
+    font-size: .8rem;
+}
+
+.produto-imgg{
+    max-height: 17rem;
+    height: 17rem;
+    min-width: 17rem;
+    max-width: 25rem;
+}
+
+footer{
+    color: #7674F9;
+    font-size: .7rem;
+}
+
+
+

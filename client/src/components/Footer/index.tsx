@@ -3,7 +3,7 @@
 export function Footer() {
     return (
         <>
-            <div className="container p-4">
+            <div className="container p-4 footer">
 
                 <section className="mb-4">
                     <a className="btn btn-primary btn-floating m-1"  href="https://www.linkedin.com/in/matheus-martarello-gutstein-aa40a3206/" role="button"><i className="fab fa-linkedin-in"></i></a>
