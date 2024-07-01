@@ -35,7 +35,8 @@ export interface IProdutosPedido{
 export interface IPedido{
     id?: number;
     usuario?: ICadastroUsuario;
-    valorToral: number;
+    dataHora: Date;
+    valorTotal?: number;
     produtosPedido: IProdutosPedido[];
 
 }
