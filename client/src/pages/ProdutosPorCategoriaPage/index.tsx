@@ -11,6 +11,7 @@ export function ProdutosPorCategoria() {
     const [data, setData] = useState<IProduto[]>([]);
     const [apiError, setApiError] = useState<string>("");
     const { id } = useParams<{ id: string }>();
+    const {findByCategoriaId} = ProdutoService;
 
     useEffect(() => {
         if (id) {
@@ -23,7 +24,7 @@ export function ProdutosPorCategoria() {
             if (!id) {
                 throw new Error("ID da categoria não está definido.");
             }
-            const response = await ProdutoService.findByCategoriaId(id);
+            const response = await findByCategoriaId(id);
             setData(response);
             setApiError("");
         } catch (error) {
@@ -57,24 +58,41 @@ export function ProdutosPorCategoria() {
             ) : (
                 <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} gap={8}>
                     {data.map((produto) => (
-                        <Card key={produto.id} borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-                            <Image src={produto.imagem} alt={produto.nome} w="100%" h="200px" objectFit="cover" />
-                            <CardBody p={4}>
-                                <Heading as="h3" size="md" mb={2}>{produto.nome}</Heading>
-                                <Text fontSize="sm" color="gray.600" mb={4} noOfLines={showFullDescription ? undefined : 3}>
-                                    {produto.descricao}
-                                </Text>
-                                <Flex justify="space-between" align="center">
-                                    <Text fontSize="lg" fontWeight="bold">{produto.preco}</Text>
-
-                                </Flex>
+                        
+                        <Card
+                            key={produto.id}
+                            _hover={{ cursor: "pointer" }}
+                            maxW='sm'
+                            className="my-4 card"
+                        >
+                            <CardBody>
+                                <img
+                                    src={produto.imagem}
+                                    alt={produto.nome}
+                                />
+                                <Stack mt='6' spacing='3'>
+                                    <Heading size='md'>{produto.nome}</Heading>
+                                    <p>
+                                        {showFullDescription ? produto.descricao : (produto.descricao.length > 50 ? `${produto.descricao.substring(0, 100)}...` : produto.descricao)}
+                                        {!showFullDescription && produto.descricao.length > 100 && (
+                                            <Button onClick={toggleDescription} variant="link" colorScheme="blue" size="sm">
+                                                Ver mais
+                                            </Button>
+                                        )}
+                                    </p>
+                                    <h1 className="preco my-2">
+                                        {produto.preco}
+                                    </h1>
+                                </Stack>
                             </CardBody>
                             <Divider />
                             <CardFooter className="d-flex justify-content-around">
-                                <Stack direction="row" spacing={4}>
-                                    <Button as={Link} to={`/produto/${produto.id}`} className="btn btn-outline-dark">Ver produto</Button>
-                                    <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-dark">Adicionar ao carrinho</Button>
-                                </Stack>
+                                <Button className='btn btn-outline-primary'>
+                                    <Link to={`/produto/${produto.id}`}>Ver produto</Link>
+                                </Button>
+                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary ">
+                                    Adicionar ao carrinho
+                                </Button>
                             </CardFooter>
                         </Card>
                     ))}

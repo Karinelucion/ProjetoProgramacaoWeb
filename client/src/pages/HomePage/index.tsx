@@ -6,7 +6,6 @@ import CategoriaService from "@/service/CategoriaService";
 import { ICategoria, IProduto } from "@/commons/interfaces";
 import blackfriday from "@/assets/blackfriday.png";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import ProdutoService from "@/service/ProdutoService";
 import CarrinhoService from "@/service/CarrinhoService";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
