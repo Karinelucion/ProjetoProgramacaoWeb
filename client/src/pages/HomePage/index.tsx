@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import ProdutoService from "@/service/ProdutoService";
 import CarrinhoService from "@/service/CarrinhoService";
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 import "./style.scss";
 
@@ -30,39 +31,144 @@ export function HomePage() {
             setProduto(responseProduto.data);
             setApiError("");
         } catch (error) {
-            setApiError("Falha ao carregar a lista de categorias.");
+            setApiError("Falha ao carregar a lista de categorias e produtos.");
         }
-    };
-
-    const onEdit = (url: string) => {
-        navigate(url);
-    };
-
-    const onRemove = async (id: number) => {
-        try {
-            const response = await CategoriaService.remove(id);
-            if (response.status === 200 || response.status === 204) {
-                setCategoria(categoriaData.filter(categoria => categoria.id !== id));
-                setProduto(produtoData.filter(produto => produto.id !== id));
-                setApiError("");
-            } else {
-                setApiError("Falha ao remover a categoria.");
-            }
-        } catch (error) {
-            setApiError("Falha ao remover a categoria.");
-        }
-    };
-
-    const chunkArray = <T extends any>(arr: T[], chunkSize: number) => {
-        const chunkedArray: T[][] = [];
-        for (let i = 0; i < arr.length; i += chunkSize) {
-            chunkedArray.push(arr.slice(i, i + chunkSize));
-        }
-        return chunkedArray;
     };
 
     const onClickAdicionarAoCarrinho = (produto: IProduto) => {
         CarrinhoService.adicionarAoCarrinho(produto);
+    };
+
+    const PaginatedCategoria = () => {
+        const [currentPage, setCurrentPage] = useState(0);
+        const pageSize = 3;
+        const totalPages = Math.ceil(categoriaData.length / pageSize);
+
+        const paginatedData = categoriaData.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+
+        const nextPage = () => {
+            if (currentPage < totalPages - 1) {
+                setCurrentPage(currentPage + 1);
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+            }
+        };
+
+        return (
+            <div>
+                <div className="d-flex justify-content-center">
+                    <Stack direction={{ base: 'column', sm: 'row' }} spacing="3">
+                        {paginatedData.map(categoria => (
+                            <Card
+                                key={categoria.id}
+                                _hover={{ cursor: "pointer" }}
+                                overflow='hidden'
+                                variant='outline'
+                            >
+                                <Stack>
+                                    <CardBody>
+                                        <Heading size='md'>{categoria.nome}</Heading>
+                                    </CardBody>
+                                    <CardFooter>
+                                        <Button className="btn btn-outline-dark">
+                                            <Link to={`/categoria/${categoria.id}`} type="button">
+                                                Ver produtos desta categoria
+                                            </Link>
+                                        </Button>
+                                    </CardFooter>
+                                </Stack>
+                            </Card>
+                        ))}
+                    </Stack>
+                    </div>
+                    <div className="mt-3 d-flex justify-content-center ">
+                        <Button onClick={prevPage} disabled={currentPage === 0} leftIcon={<IoIosArrowBack />} className="btn me-1"></Button>
+                        <Button onClick={nextPage} disabled={currentPage === totalPages - 1} rightIcon={<IoIosArrowForward />} className="btn"></Button>
+                    </div>
+                </div>
+        );
+    };
+
+    const PaginatedProduto = () => {
+        const [currentPage, setCurrentPage] = useState(0);
+        const pageSize = 3;
+        const totalPages = Math.ceil(produtoData.length / pageSize);
+
+        const paginatedData = produtoData.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+
+        const [showFullDescription, setShowFullDescription] = useState(false);
+
+        const toggleDescription = () => {
+            setShowFullDescription(!showFullDescription);
+        };
+
+        const nextPage = () => {
+            if (currentPage < totalPages - 1) {
+                setCurrentPage(currentPage + 1);
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+            }
+        };
+
+        return (
+            <div>
+            <div className="d-flex justify-content-center">
+                <Stack direction={{ base: 'column', sm: 'row' }} spacing="4">
+                    {paginatedData.map(produto => (
+                        <Card
+                            key={produto.id}
+                            _hover={{ cursor: "pointer" }}
+                            maxW='sm'
+                            className="my-4 card"
+                        >
+                            <CardBody>
+                                <img
+                                    src={produto.imagem}
+                                    alt={produto.nome}
+                                />
+                                <Stack mt='6' spacing='3'>
+                                    <Heading size='md'>{produto.nome}</Heading>
+                                    <p>
+                                        {showFullDescription ? produto.descricao : (produto.descricao.length > 50 ? `${produto.descricao.substring(0, 100)}...` : produto.descricao)}
+                                        {!showFullDescription && produto.descricao.length > 100 && (
+                                            <Button onClick={toggleDescription} variant="link" colorScheme="blue" size="sm">
+                                                Ver mais
+                                            </Button>
+                                        )}
+                                    </p>
+                                    <h1 className="preco my-2">
+                                        {produto.preco}
+                                    </h1>
+                                </Stack>
+                            </CardBody>
+                            <Divider />
+                            <CardFooter className="d-flex justify-content-around">
+                                <Button className='btn btn-outline-primary'>
+                                    <Link to={`/produto/${produto.id}`}>Ver produto</Link>
+                                </Button>
+                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary ">
+                                    Adicionar ao carrinho
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    ))}
+                </Stack>
+                </div>
+                <div className="mt-3 d-flex justify-content-center mb-4">
+                    <Button onClick={prevPage} disabled={currentPage === 0} leftIcon={<IoIosArrowBack />} className="btn me-1"></Button>
+                    <Button onClick={nextPage} disabled={currentPage === totalPages - 1} rightIcon={<IoIosArrowForward />} className="btn"></Button>
+                    <Button  as={Link} to='/produtos' className="btn ms-1">Ver todos os produtos</Button>
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -80,45 +186,7 @@ export function HomePage() {
                             <h1 className="mx-4 flex-fill categorias-title">Categorias</h1>
                             <hr className="my-4 hr hr-blurry w-50 divisor-color" />
                         </div>
-                        <div id="carouselExampleFadeCategorias" className="carousel slide carousel-fade d-flex justify-content-center">
-                            <div className="carousel-inner">
-                                {chunkArray(categoriaData, 3).map((chunk, index) => (
-                                    <div key={index} className={`carousel-item d-flex justify-content-center ${index === 0 ? 'active' : ''}`}>
-                                        <Stack direction={{ base: 'column', sm: 'row' }} spacing="4">
-                                            {chunk.map(categoria => (
-                                                <Card
-                                                    key={categoria.id}
-                                                    _hover={{ cursor: "pointer", background: "#eee" }}
-                                                    overflow='hidden'
-                                                    variant='outline'
-                                                    className="my-4"
-                                                >
-                                                    <Stack>
-                                                        <CardBody>
-                                                            <Heading size='md'>{categoria.nome}</Heading>
-                                                        </CardBody>
-                                                        <CardFooter>
-                                                            <Link to={`/categoria/${categoria.id}`} type="button" className="btn btn-">
-                                                                Ver produtos desta categoria
-                                                            </Link>
-                                                        </CardFooter>
-                                                    </Stack>
-                                                </Card>
-                                            ))}
-                                        </Stack>
-                                    </div>
-                                ))}
-                                {apiError && <div className="alert alert-danger">{apiError}</div>}
-                            </div>
-                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFadeCategorias" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFadeCategorias" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                        </div>
+                        <PaginatedCategoria />
                     </div>
 
                     <div className="m-5 d-flex text-center justify-content-center align-items-center">
@@ -126,58 +194,9 @@ export function HomePage() {
                         <h1 className="mx-4 flex-fill categorias-title">Produtos em destaque</h1>
                         <hr className="my-4 hr hr-blurry w-50 divisor-color" />
                     </div>
-                    <div id="carouselExampleFadeProdutos" className="carousel slide carousel-fade">
-                        <div className="carousel-inner">
-                            {chunkArray(produtoData, 3).map((chunk, index) => (
-                                <div key={index} className={`d-flex justify-content-center carousel-item ${index === 0 ? 'active' : ''}`}>
-                                    <Stack direction={{ base: 'column', sm: 'row' }} spacing="4">
-                                        {chunk.map(produto => (
-                                            <Card
-                                                key={produto.id}
-                                                _hover={{ cursor: "pointer", background: "#eee" }}
-                                                maxW='sm'
-                                                className="my-4"
-                                            >
-                                                <CardBody>
-                                                    <img
-                                                        src={produto.imagem}
-                                                        alt='produto'
-                                                    />
-                                                    <Stack mt='6' spacing='3'>
-                                                        <Heading size='md'>{produto.nome}</Heading>
-                                                        <p>
-                                                            {produto.descricao}.
-                                                        </p>
-                                                        <h1 color='blue.600' >
-                                                            {produto.preco}
-                                                        </h1>
-                                                    </Stack>
-                                                </CardBody>
-                                                <Divider />
-                                                <CardFooter>
-                                                    <Link to={`/produto/${produto.id}`} type="button" className='btn btn-primary'>Ver produto</Link>
-                                                    <Button onClick={() => onClickAdicionarAoCarrinho(produto)} colorScheme='blue'>
-                                                        Adicionar ao carrinho
-                                                    </Button>
-                                                </CardFooter>
-                                            </Card>
-                                        ))}
-                                    </Stack>
-                                </div>
-                            ))}
-                            {apiError && <div className="alert alert-danger">{apiError}</div>}
-                        </div>
-                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFadeProdutos" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Previous</span>
-                        </button>
-                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFadeProdutos" data-bs-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Next</span>
-                        </button>
-                    </div>
+                    <PaginatedProduto />
+
                     <div className="d-flex justify-content-center">
-                        <Link to='/produtos' type="button" className="btn btn-light">Ver todos os produtos</Link>
                     </div>
                 </div>
             </main>

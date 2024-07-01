@@ -19,7 +19,7 @@ export function BaseRoutes() {
         <Route path="/inicio" element={<HomePage />} />
         <Route path="/" element={<HomePage />} /> 
         <Route path="/produtos" element={<ListagemDeProdutos />} />
-        <Route path="/categorias/:id" element={<ProdutosPorCategoria />} />
+        <Route path="/categoria/:id" element={<ProdutosPorCategoria />} />
         <Route path="/produtos/:id" element={<ProdutosDetalhes />} />
         <Route path="/carrinho" element={<CarrinhoPage />} />
         

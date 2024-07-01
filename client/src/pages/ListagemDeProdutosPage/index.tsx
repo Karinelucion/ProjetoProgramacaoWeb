@@ -72,13 +72,13 @@ export function ListagemDeProdutos() {
                     </CardBody>
                     <Divider />
                     <CardFooter>
-                          <Button onClick={() => onClickAdicionarAoCarrinho(produto)} variant='ghost' colorScheme='blue'>
-                              Adicionar ao carrinho
-                          </Button>
+                        <Button onClick={() => onClickAdicionarAoCarrinho(produto)} variant='ghost' colorScheme='blue'>
+                            Adicionar ao carrinho
+                        </Button>
                     </CardFooter>
                 </Card>
             ))}
-            { apiError && <div className="alert alert-danger">{apiError}</div>}
+            {apiError && <div className="alert alert-danger">{apiError}</div>}
         </div>
     );
 }

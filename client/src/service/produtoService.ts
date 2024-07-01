@@ -1,5 +1,6 @@
 import { IProduto } from "@/commons/interfaces";
 import { api } from "@/lib/axios";
+import axios from "axios";
 
 const produtoURL = "/produtos";
 
@@ -21,6 +22,15 @@ const findAll = async (): Promise<any> => {
     response = err.response;
   }
   return response;
+};
+
+const findByCategoriaId = async (categoriaId: string): Promise<IProduto[]> => {
+  try {
+    const response = await api.get<IProduto[]>(`${produtoURL}?categoria=${categoriaId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Falha ao carregar os produtos da categoria.');
+  }
 };
 
 const findOne = async (id: number): Promise<any> => {
@@ -48,6 +58,7 @@ const ProdutoService = {
   findAll,
   findOne,
   remove,
+  findByCategoriaId
 };
 
 export default ProdutoService;
