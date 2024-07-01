@@ -7,6 +7,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import { HomePage } from "@/pages/HomePage";
 import { ProdutosPorCategoria } from "@/pages/ProdutosPorCategoriaPage";
 import { CarrinhoPage } from "@/pages/CarrinhoPage";
+import { ConfirmacaoPedidoPage } from "@/pages/ConfirmacaoPedidoPage";
 
 export function BaseRoutes() {
   return (
@@ -21,10 +22,11 @@ export function BaseRoutes() {
         <Route path="/categorias/:id" element={<ProdutosPorCategoria />} />
         <Route path="/produtos/:id" element={<ProdutosDetalhes />} />
         <Route path="/carrinho" element={<CarrinhoPage />} />
+        
 
         {/* Protected Routes */}
         <Route element={<AuthenticatedRoutes />}>
-
+          <Route path="/pedido" element={<ConfirmacaoPedidoPage />} />
         </Route>
 
       </Routes>

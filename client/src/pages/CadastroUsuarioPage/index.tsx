@@ -42,6 +42,7 @@ export function CadastroUsuario() {
         [name]: value,
       };
     });
+    
     setErrors((previousErrors) => {
       return {
         ...previousErrors,
