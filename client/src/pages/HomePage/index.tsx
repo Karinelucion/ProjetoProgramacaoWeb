@@ -69,7 +69,7 @@ export function HomePage() {
         <>
             <Header />
             <div style={{ height: '4rem' }} />
-            <main className="container">
+            <main className="">
                 <div className="background">
                     <figure>
                         <img src={blackfriday} alt="BlackFriday" />
@@ -80,10 +80,10 @@ export function HomePage() {
                             <h1 className="mx-4 flex-fill categorias-title">Categorias</h1>
                             <hr className="my-4 hr hr-blurry w-50 divisor-color" />
                         </div>
-                        <div id="carouselExampleFadeCategorias" className="carousel slide carousel-fade">
+                        <div id="carouselExampleFadeCategorias" className="carousel slide carousel-fade d-flex justify-content-center">
                             <div className="carousel-inner">
                                 {chunkArray(categoriaData, 3).map((chunk, index) => (
-                                    <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                                    <div key={index} className={`carousel-item d-flex justify-content-center ${index === 0 ? 'active' : ''}`}>
                                         <Stack direction={{ base: 'column', sm: 'row' }} spacing="4">
                                             {chunk.map(categoria => (
                                                 <Card
@@ -129,7 +129,7 @@ export function HomePage() {
                     <div id="carouselExampleFadeProdutos" className="carousel slide carousel-fade">
                         <div className="carousel-inner">
                             {chunkArray(produtoData, 3).map((chunk, index) => (
-                                <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                                <div key={index} className={`d-flex justify-content-center carousel-item ${index === 0 ? 'active' : ''}`}>
                                     <Stack direction={{ base: 'column', sm: 'row' }} spacing="4">
                                         {chunk.map(produto => (
                                             <Card
@@ -181,7 +181,6 @@ export function HomePage() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     );
 }
