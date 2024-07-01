@@ -83,7 +83,7 @@ export function ListagemDeProdutos() {
                             <Divider />
                             <CardFooter className="d-flex justify-content-around">
                                 <Button className='btn btn-outline-primary me-2'>
-                                    <Link to={`/produto/${produto.id}`}>Ver produto</Link>
+                                    <Link to={`/produtos/${produto.id}`}>Ver produto</Link>
                                 </Button>
                                 <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary ">
                                     Adicionar ao carrinho

@@ -24,13 +24,15 @@ const findAll = async (): Promise<any> => {
   return response;
 };
 
-const findByCategoriaId = async (categoriaId: string): Promise<IProduto[]> => {
+const findByCategoriaId = async (categoriaId: number): Promise<any> => {
+  let response;
   try {
-    const response = await api.get<IProduto[]>(`${produtoURL}?categoria=${categoriaId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Falha ao carregar os produtos da categoria.');
+    response = await api.get(`${produtoURL}/categoria/${categoriaId}`);
+    
+  } catch (error: any) {
+    response = error.response;
   }
+  return response;
 };
 
 const findOne = async (id: number): Promise<any> => {

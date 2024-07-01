@@ -10,22 +10,22 @@ import "./style.scss";
 export function ProdutosPorCategoria() {
     const [data, setData] = useState<IProduto[]>([]);
     const [apiError, setApiError] = useState<string>("");
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams();
     const {findByCategoriaId} = ProdutoService;
 
     useEffect(() => {
         if (id) {
-            loadData();
+            loadData(Number(id));
         }
-    }, [id]);
+    }, []);
 
-    const loadData = async () => {
+    const loadData = async (id: number) => {
         try {
             if (!id) {
                 throw new Error("ID da categoria não está definido.");
             }
             const response = await findByCategoriaId(id);
-            setData(response);
+            setData(response.data);
             setApiError("");
         } catch (error) {
             setApiError("Falha ao carregar a lista de produtos.");
@@ -88,7 +88,7 @@ export function ProdutosPorCategoria() {
                             <Divider />
                             <CardFooter className="d-flex justify-content-around">
                                 <Button className='btn btn-outline-primary'>
-                                    <Link to={`/produto/${produto.id}`}>Ver produto</Link>
+                                    <Link to={`/produtos/${produto.id}`}>Ver produto</Link>
                                 </Button>
                                 <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary ">
                                     Adicionar ao carrinho
