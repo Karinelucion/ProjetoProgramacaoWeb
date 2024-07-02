@@ -31,12 +31,13 @@ export function ConfirmacaoPedidoPage() {
         produtosPedido: [],
       });
 
-    const onClickConfirmarPedido = async () => {
-    const dataHoraStr = moment.tz('America/Sao_Paulo').format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+    const onClickConfirmarPedido = async () => { 
+    const dataHoraStr = moment.tz('America/Sao_Paulo').subtract(3, 'hours');
+    const utcDate = moment.utc(dataHoraStr.format()); 
 
     const pedido: IPedido = {
         usuario: undefined,
-        dataHora: new Date(dataHoraStr),
+        dataHora: utcDate.toDate(),
         produtosPedido: produtosPedido,
     };
 
