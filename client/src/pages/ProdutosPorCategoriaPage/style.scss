@@ -38,36 +38,16 @@ h3 {
     color: #7674F9;
 }
 
+.all-viewport{
+    height: 100vh;
+  }
+
 .nav-settings{
     background-color: #23232F;
     height: 4rem;
     -webkit-box-shadow: 0px 2px 22px 0px rgb(62, 49, 78);
     -moz-box-shadow: 0px 2px 22px 0px rgba(62, 49, 78);
     box-shadow: 0px 2px 22px 0px rgba(62, 49, 78);
-}
-
-.icon-color {
-    color: #7674F9;
-}
-
-.height-100{
-    height: 100%;
-}
-
-.icon-settings{
-    font-size: 1.5rem;
-    transition: .3s;
-}
-
-.icon-settings:hover{
-    color: #abe6cd;
-    transition: .3s;
-}
-
-.badge-notification{
-    margin-left: 0;
-    margin-top: -.5rem;
-    font-size: .8rem;
 }
 
 .btn-entrar{
@@ -132,14 +112,14 @@ h3 {
 }
 
 .preco{
-    color: #3ba555;
+    color: #4a7758;
 }
 
 .card-hp-settings{
     width: 30rem;
     height: 17rem;
 }
-
+    
 .card-hp-conteudo{
     background: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
@@ -321,14 +301,6 @@ h3 {
     border-color: #7674F9;
 }
 
-.divisor-margin{
-    margin-top: 5rem;
-}
-
-.product-margin-detalhes {
-    margin: 1rem;
-}
-
 .calcular-frete{
     height: 2.7rem;
     width: 15rem;
@@ -493,7 +465,7 @@ h3 {
     color: #7674F9;
 }
 
-
-
-
-
+.imagem-card{
+    max-width: 60%; 
+    height: auto; 
+}
