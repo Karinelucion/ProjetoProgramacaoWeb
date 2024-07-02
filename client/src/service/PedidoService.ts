@@ -11,7 +11,19 @@ const registrarPedido = async (pedido: IPedido): Promise<any> => {
     return response;
   };
 
+  const consultarPedidosUsuario = async (): Promise<any> => {
+    let response;
+
+    try {
+      response = await api.get("/pedidos/meuspedidos");
+    } catch (err: any) {
+      response = err.response;
+    }
+    return response;
+  }
+
   const PedidoService = {
     registrarPedido,
+    consultarPedidosUsuario,
   };
   export default PedidoService;

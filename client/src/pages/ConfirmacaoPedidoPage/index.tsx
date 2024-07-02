@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, IconButton,  Flex, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react';
 import CarrinhoService from "@/service/CarrinhoService";
 import { IProdutosPedido, IPedido } from "@/commons/interfaces";
 import { Link, useNavigate } from 'react-router-dom';
 import { Header } from "@/components/Header";
 import PedidoService from "@/service/PedidoService";
+import moment from 'moment-timezone';
 
 import "./style.scss";
 
@@ -31,11 +32,15 @@ export function ConfirmacaoPedidoPage() {
       });
 
     const onClickConfirmarPedido = async () => {
+    const dataHoraStr = moment.tz('America/Sao_Paulo').format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+
     const pedido: IPedido = {
         usuario: undefined,
-        dataHora: new Date(),
+        dataHora: new Date(dataHoraStr),
         produtosPedido: produtosPedido,
     };
+
+    console.log(moment.tz('America/Sao_Paulo').toDate());
     setPendingApiCall(true);
 
     const response = await PedidoService.registrarPedido(pedido);
