@@ -1,5 +1,6 @@
 import { IProduto } from "@/commons/interfaces";
 import { api } from "@/lib/axios";
+import axios from "axios";
 
 const produtoURL = "/produtos";
 
@@ -19,6 +20,17 @@ const findAll = async (): Promise<any> => {
     response = await api.get(produtoURL);
   } catch (err: any) {
     response = err.response;
+  }
+  return response;
+};
+
+const findByCategoriaId = async (categoriaId: number): Promise<any> => {
+  let response;
+  try {
+    response = await api.get(`${produtoURL}/categoria/${categoriaId}`);
+    
+  } catch (error: any) {
+    response = error.response;
   }
   return response;
 };
@@ -48,6 +60,7 @@ const ProdutoService = {
   findAll,
   findOne,
   remove,
+  findByCategoriaId
 };
 
 export default ProdutoService;
