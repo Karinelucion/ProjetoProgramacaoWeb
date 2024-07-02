@@ -43,7 +43,9 @@ export function LoginPage() {
 
   return (
     <>
-      <main className="form-signup w-100 m-auto">
+    <div className="background all-viewport  d-flex justify-content-center">
+      
+      <main className="form-signup w-100 m-auto w-100 h-100 ">
         <form>
           <div className="text-center">
             <h1 className="h3 mb-3 fw-normal">Login</h1>
@@ -90,9 +92,11 @@ export function LoginPage() {
           />         
         </form>
         <div className="text-center">
-          <Link to="/usuario">Deseja cadastrar-se</Link>
+          <Link to="/usuario" className="link-dark">Deseja cadastrar-se</Link>
         </div>
       </main>
+      
+    </div>
     </>
   );
 }
