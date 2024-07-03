@@ -47,8 +47,8 @@ export function CarrinhoPage() {
     return (
         <>
             <Header />
-            <div className="background" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh', paddingTop: '4rem'}}>
-                <Box bg={bgColor} color={textColor} p={4} className="container">
+            <div className="background" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', width: '100%', minHeight: '100vh', paddingTop: '6rem' }}>
+                <Box bg={bgColor} color={textColor} p={4} className="container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                     <Heading as="h3" size="lg" mb={4}>Carrinho de Compras</Heading>
                     {produtosPedido.length === 0 ? (
                         <div className='d-flex justify-content-center align-items-center mt-2'>
