@@ -60,32 +60,28 @@ export function ListagemDeProdutos() {
                             maxW='sm'
                             className="my-4"
                         >
-                            <CardBody>
+                            <CardBody className="text-center p-">
+                                <div className="d-flex justify-content-center">
                                 <img
-                                    src={produto.imagem}
+                                    src={produto.urlImagem}
                                     alt={produto.nome}
+                                    className="imagem-card"
                                 />
+                                </div>
+                            
                                 <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>{produto.nome}</Heading>
-                                    <p>
-                                        {showFullDescription ? produto.descricao : (produto.descricao.length > 50 ? `${produto.descricao.substring(0, 100)}...` : produto.descricao)}
-                                        {!showFullDescription && produto.descricao.length > 100 && (
-                                            <Button onClick={toggleDescription} variant="link" colorScheme="blue" size="sm">
-                                                Ver mais
-                                            </Button>
-                                        )}
-                                    </p>
-                                    <h1 className="preco my-2">
-                                        {produto.preco}
+                                    <Heading size='md'>{produto.nome}</Heading>                             
+                                    <h1 className="preco">
+                                    R${produto.preco}
                                     </h1>
+                                    <p>À vista no PIX</p>
                                 </Stack>
                             </CardBody>
-                            <Divider />
-                            <CardFooter className="d-flex justify-content-around">
-                                <Button className='btn btn-outline-primary me-2'>
+                            <CardFooter className="d-flex justify-content-around pt-0 px-2">
+                                <Button className='btn btn-outline-primary me-1'>
                                     <Link to={`/produtos/${produto.id}`}>Ver produto</Link>
                                 </Button>
-                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary ">
+                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary">
                                     Adicionar ao carrinho
                                 </Button>
                             </CardFooter>
