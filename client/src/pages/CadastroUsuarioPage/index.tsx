@@ -7,7 +7,6 @@ import { Header } from "../../components/Header";
 import { useColorModeValue, Box, Heading, Text } from '@chakra-ui/react';
 import AuthService from "@/service/AuthService";
 
-import "./style.scss";
 
 export function CadastroUsuario() {
   const [form, setForm] = useState<ICadastroUsuario>({

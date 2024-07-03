@@ -6,6 +6,8 @@ import { Button, Box, Grid, Heading, Stack, Image, Text, Flex, Card, CardBody, C
 import CarrinhoService from "@/service/CarrinhoService";
 import { Header } from "@/components/Header";
 
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+
 import "./style.scss";
 
 export function ListagemDeProdutos() {
@@ -38,6 +40,71 @@ export function ListagemDeProdutos() {
         setShowFullDescription(!showFullDescription);
     };
 
+    const PaginatedProduto = () => {
+        const [currentPage, setCurrentPage] = useState(0);
+        const pageSize = 8;
+        const totalPages = Math.ceil(data.length / pageSize);
+
+        const paginatedData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+
+        const nextPage = () => {
+            if (currentPage < totalPages - 1) {
+                setCurrentPage(currentPage + 1);
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+            }
+        };
+        return (
+            <>
+                <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} gap={4}>
+                    {paginatedData.map((produto) => (
+                        <Card
+                            key={produto.id}
+                            _hover={{ cursor: "pointer" }}
+                            maxW='sm'
+                            className="my-4"
+                        >
+                            <CardBody className="text-center p-">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        src={produto.urlImagem}
+                                        alt={produto.nome}
+                                        className="imagem-card"
+                                    />
+                                </div>
+
+                                <Stack mt='6' spacing='3'>
+                                    <Heading size='md'>{produto.nome}</Heading>
+                                    <h1 className="preco">
+                                        R${produto.preco}
+                                    </h1>
+                                    <p>À vista no PIX</p>
+                                </Stack>
+                            </CardBody>
+                            <CardFooter className="d-flex justify-content-around pt-0 px-2">
+                                <Button className='btn btn-outline-primary me-1'>
+                                    <Link to={`/produtos/${produto.id}`}>Ver produto</Link>
+                                </Button>
+                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary">
+                                    Adicionar ao carrinho
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    ))}
+                </Grid>
+                <div className="mt-3 d-flex justify-content-center">
+                    <Button onClick={prevPage} disabled={currentPage === 0} leftIcon={<IoIosArrowBack />} className="btn me-1"></Button>
+                    <Button onClick={nextPage} disabled={currentPage === totalPages - 1} rightIcon={<IoIosArrowForward />} className="btn"></Button>
+                </div>
+            </>
+        )
+
+    }
+
     return (
         <>
             <Header />
@@ -52,49 +119,14 @@ export function ListagemDeProdutos() {
                         <Text fontSize="lg">Nenhum produto encontrado.</Text>
                     </Box>
                 ) : (
-                    <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} gap={4}>
-                        {data.map((produto) => (
-                            <Card
-                            key={produto.id}
-                            _hover={{ cursor: "pointer" }}
-                            maxW='sm'
-                            className="my-4"
-                        >
-                            <CardBody className="text-center p-">
-                                <div className="d-flex justify-content-center">
-                                <img
-                                    src={produto.urlImagem}
-                                    alt={produto.nome}
-                                    className="imagem-card"
-                                />
-                                </div>
-                            
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>{produto.nome}</Heading>                             
-                                    <h1 className="preco">
-                                    R${produto.preco}
-                                    </h1>
-                                    <p>À vista no PIX</p>
-                                </Stack>
-                            </CardBody>
-                            <CardFooter className="d-flex justify-content-around pt-0 px-2">
-                                <Button className='btn btn-outline-primary me-1'>
-                                    <Link to={`/produtos/${produto.id}`}>Ver produto</Link>
-                                </Button>
-                                <Button onClick={() => onClickAdicionarAoCarrinho(produto)} className="btn btn-outline-primary">
-                                    Adicionar ao carrinho
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                        ))}
-                    </Grid>
+                    <PaginatedProduto />
                 )}
             </Box>
             {apiError && (
                 <Box mt={4} textAlign="center">
                     <Text fontSize="lg" color="red.500">{apiError}</Text>
                 </Box>
-            )}       
-            </>
+            )}
+        </>
     );
 }
