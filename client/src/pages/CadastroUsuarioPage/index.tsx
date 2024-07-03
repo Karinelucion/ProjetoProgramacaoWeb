@@ -5,7 +5,6 @@ import { ButtonWithProgress } from "../../components/ButtonWithProgress";
 import { Input } from "../../components/Input";
 import AuthService from "@/service/AuthService";
 
-import "./style.scss";
 
 export function CadastroUsuario() {
   const [form, setForm] = useState<ICadastroUsuario>({
