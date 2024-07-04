@@ -150,7 +150,7 @@ export function CadastroUsuario() {
 
               <div  className="text-center">
                 <Text color={textColor} className="my-0">Já possui cadastro? <Link to="/login" className="link-primary">Entre agora</Link></Text>
-                
+  
               </div>
             </form>
           </main>

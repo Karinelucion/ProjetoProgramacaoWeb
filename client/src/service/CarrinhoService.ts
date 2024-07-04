@@ -83,6 +83,7 @@ export const adicionarAoCarrinho = (produto: IProduto) => {
     return novosProdutosPedido;
   };
 
+
   const CarrinhoService = {
     adicionarAoCarrinho,
     consultarCarrinho,

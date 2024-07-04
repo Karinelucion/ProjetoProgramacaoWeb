@@ -30,6 +30,7 @@ export function ProdutosDetalhes() {
 
     const onClickAdicionarAoCarrinho = (produto: IProduto) => {
         CarrinhoService.adicionarAoCarrinho(produto);
+        //window.location.reload(); 
     };
 
     return (
