@@ -36,6 +36,7 @@ export function HomePage() {
 
     const onClickAdicionarAoCarrinho = (produto: IProduto) => {
         CarrinhoService.adicionarAoCarrinho(produto);
+        window.location.reload(); 
     };
 
     const PaginatedCategoria = () => {

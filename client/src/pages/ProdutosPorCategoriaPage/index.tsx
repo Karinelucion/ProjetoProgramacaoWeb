@@ -35,8 +35,8 @@ export function ProdutosPorCategoria() {
 
     const onClickAdicionarAoCarrinho = (produto: IProduto) => {
         CarrinhoService.adicionarAoCarrinho(produto);
+        //window.location.reload(); 
     };
-
 
     const PaginatedProduto = () => {
         const [currentPage, setCurrentPage] = useState(0);
